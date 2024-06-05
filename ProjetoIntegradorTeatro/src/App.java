@@ -39,12 +39,16 @@ public class App {
             for (int j = 0; j < poltronas[i].length; j++) {
                 poltronas[i][j] = false;
             }
+            poltronas[i][0] = true;
         }
+        String ocupado = "";
 
         // printando
         for (int i = 0; i < poltronas.length; i++) {
             for (int j = 0; j < poltronas[i].length; j++) {
-                System.out.println(" " + "poltrona " + (j + 1) + " área: " + areas[i]);
+                ocupado = poltronas[i][j] ? "ocupado" : "desocupado";
+                System.out.println(" " + "poltrona " + (j + 1) + " área: " + areas[i] + " está " + ocupado);
+
             }
             System.out.print("\n");
         }
