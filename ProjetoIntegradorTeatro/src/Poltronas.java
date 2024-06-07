@@ -1,7 +1,8 @@
-import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Poltronas {
-  public static String[][] poltronas() {
+  public static List<String[]> main() {
     String[] plateiaA = new String[25];
     String[] plateiaB = new String[100];
     String[] frisa1 = new String[5];
@@ -17,33 +18,33 @@ public class Poltronas {
     String[] camarote5 = new String[10];
     String[] balcaoNobre = new String[50];
 
-    String[][] poltronas = new String[15][];
+    List<String[]> poltronas = new ArrayList<>();
     String[] areas = { "Plateia A", "Plateia B", "Frisa1", "Frisa2", "Frisa3", "Frisa4", "Frisa5", "Frisa6",
         "Camarote1", "Camarote2", "Camarote3", "Camarote4", "Camarote5", "Balcão Nobre" };
-
-    poltronas[0] = plateiaA;
-    poltronas[1] = plateiaB;
-    poltronas[2] = frisa1;
-    poltronas[3] = frisa2;
-    poltronas[4] = frisa3;
-    poltronas[5] = frisa4;
-    poltronas[6] = frisa5;
-    poltronas[7] = frisa6;
-    poltronas[8] = camarote1;
-    poltronas[9] = camarote2;
-    poltronas[10] = camarote3;
-    poltronas[11] = camarote4;
-    poltronas[12] = camarote5;
-    poltronas[13] = balcaoNobre;
-    poltronas[14] = areas;
+    String[] valores = { "40", "60", "120", "120", "120", "120", "120", "120", "80", "80", "80", "80", "80", "250" };
+    poltronas.add(plateiaA);
+    poltronas.add(plateiaB);
+    poltronas.add(frisa1);
+    poltronas.add(frisa2);
+    poltronas.add(frisa3);
+    poltronas.add(frisa4);
+    poltronas.add(frisa5);
+    poltronas.add(frisa6);
+    poltronas.add(camarote1);
+    poltronas.add(camarote2);
+    poltronas.add(camarote3);
+    poltronas.add(camarote4);
+    poltronas.add(camarote5);
+    poltronas.add(balcaoNobre);
+    poltronas.add(areas);
+    poltronas.add(valores);
 
     // populando o array
-    for (int i = 0; i < poltronas.length - 1; i++) {
-      for (int j = 0; j < poltronas[i].length; j++) {
-        poltronas[i][j] = "desocupado";
+    for (int i = 0; i < poltronas.size() - 2; i++) {
+      for (int j = 0; j < poltronas.get(i).length; j++) {
+        poltronas.get(i)[j] = "desocupado";
       }
     }
-
     return poltronas;
   }
 }

@@ -1,14 +1,15 @@
+import java.util.List;
 import java.util.Scanner;
 
 public class Compra {
   public static void SignUp() {
     String cpf = "";
     int turno = 0, area = 0, poltrona = 0;
-    String[][] manha, tarde, noite;
+    List<String[]> manha, tarde, noite;
 
-    manha = Poltronas.poltronas();
-    tarde = Poltronas.poltronas();
-    noite = Poltronas.poltronas();
+    manha = Poltronas.main();
+    tarde = Poltronas.main();
+    noite = Poltronas.main();
     Scanner input = new Scanner(System.in);
 
     System.out.println("insira o cpf do titular do ingresso: ");
@@ -25,20 +26,22 @@ public class Compra {
 
     switch (turno) {
       case 1:
-        manha[(area - 1)][(poltrona - 1)] = "ocupado";
+        manha.get(area - 1)[(poltrona - 1)] = "ocupado";
         PrintArray.main(manha);
         break;
       case 2:
-        tarde[(area - 1)][(poltrona - 1)] = "ocupado";
-        PrintArray.main(tarde);
+        tarde.get(area - 1)[(poltrona - 1)] = "ocupado";
+        PrintArray.main(manha);
         break;
       case 3:
-        noite[(area - 1)][(poltrona - 1)] = "ocupado";
-        PrintArray.main(noite);
+        noite.get(area - 1)[(poltrona - 1)] = "ocupado";
+        PrintArray.main(manha);
         break;
       default:
         System.out.println("A opção escolhida é inválida. Tente novamente.");
         break;
     }
+    Ticket ingresso = new Ticket(cpf, null, area, poltrona, cpf)
   }
+
 }
