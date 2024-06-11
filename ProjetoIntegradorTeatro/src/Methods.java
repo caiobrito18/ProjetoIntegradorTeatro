@@ -1,7 +1,7 @@
 import java.util.List;
 
 public class Methods {
-  public static void main(List<String[]> e) {
+  public static void printArray(List<String[]> e) {
     for (int i = 0; i < e.size() - 2; i++) {
       System.out.println("área :" + e.get(14)[i]);
       for (int j = 0; j < e.get(i).length; j++) {
