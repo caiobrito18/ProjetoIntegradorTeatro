@@ -1,62 +1,64 @@
-import javax.swing.JOptionPane;
+import java.util.HashMap;
 
 import classes.Area;
 import classes.Client;
+import classes.Piece;
 import classes.Theater;
-import java.util.HashMap;
-import java.util.Scanner;
-import javax.sound.sampled.SourceDataLine;
+import classes.Ticket;
+import classes.Turn;
 
 public class Methods {
   public static void printArray(Area e) {
     for (int i = 0; i < e.getTotalSeats() - 2; i++) {
-      if(e.isSeatOccupied(i))
-      {  System.out.println("[ XX ]"); }
-      else{ System.out.println("["+i+"]");}
+      if (e.isSeatOccupied(i)) {
+        System.out.println("[ XX ]");
+      } else {
+        System.out.println("[" + i + "]");
       }
     }
+  }
 
-        public void buyTicket(String cpf, String pieceName, String turn, int area, HashMap<Integer,Client> clients, Theater teatro, int seat) {
-          
-            if (cpf == null || cpf.isEmpty()) {
-                System.out.println("");
-                return;
-            }
+  public void buyTicket(String cpf, String piece, HashMap<String, Piece> pieces, String turn, Integer area,
+      HashMap<String, Client> clients, Theater teatro, Integer seat) {
 
-            if (pieceName == null) {
-                return;
-            }
+    if (cpf == null || cpf.isEmpty()) {
+      System.out.println("");
+      return;
+    }
 
-            if (turn == null) {
-                return;
-            }
+    if (piece == null) {
+      return;
+    }
 
-            try {
-                if (seat < 1 || seat > teatro.getAreas().get(area).getTotalSeats()) {
-                    throw new NumberFormatException();
-                }
-            } catch (NumberFormatException ex) {
-                return;
-            }
+    if (turn == null) {
+      return;
+    }
 
-            if (!clientes.containsKey(cpf)) {
-                clientes.put(cpf, new Cliente(cpf));
-            }
-            Cliente cliente = clientes.get(cpf);
-            Peca peca = pecas.get(pecaNome);
-            Sessao sessao = peca.getSessoes().get(sessaoNome);
-            Area area = teatro.getAreas().get(areaNome);
+    try {
+      if (seat < 1 || seat > teatro.getAreas().get(area).getTotalSeats()) {
+        throw new NumberFormatException();
+      }
+    } catch (NumberFormatException ex) {
+      return;
+    }
 
-            if (area.isPoltronaOcupada(poltrona - 1)) {
-                JOptionPane.showMessageDialog(Main.this, "Poltrona já está ocupada!", "Erro", JOptionPane.ERROR_MESSAGE);
-            } else {
-                Ingresso ingresso = new Ingresso(cpf, pecaNome, sessaoNome, areaNome, poltrona, area.getPreco());
-                cliente.adicionarIngresso(ingresso);
-                sessao.adicionarIngresso(ingresso);
-                area.comprarPoltrona(poltrona - 1);
-                JOptionPane.showMessageDialog(Main.this, "Ingresso comprado com sucesso!");
-                atualizarPoltronas();
-            }
-        }
+    if (!clients.containsKey(cpf)) {
+      clients.put(cpf, new Client(cpf));
+    }
+    Client currentClient = clients.get(cpf);
+    Piece selectedPiece = pieces.get(piece);
+    Turn selectedTurn = selectedPiece.getTurns().get(turn);
+    Area selectedArea = teatro.getAreas().get(area);
+
+    if (selectedArea.isSeatOccupied(seat - 1)) {
+      System.out.println("poltrona já se encontra ocupada");
+    } else {
+      Ticket ticket = new Ticket(cpf.toString(), area.toString(), turn, area.toString(), seat,
+          selectedArea.getPreco());
+      currentClient.addTicket(ticket);
+      selectedTurn.addTicket(ticket);
+      selectedArea.buySeats(seat - 1);
+      System.out.println("Ingresso comprado com sucesso");
     }
   }
+}

@@ -20,7 +20,7 @@ public class Client {
         return tickets;
     }
 
-    public void adicionarTicket(Ticket ticket) {
+    public void addTicket(Ticket ticket) {
         tickets.add(ticket);
     }
 
