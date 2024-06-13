@@ -1,4 +1,4 @@
-package classes;
+package objects;
 
 import java.util.ArrayList;
 
@@ -27,12 +27,12 @@ public class Theater {
         return areas;
     }
 
-    public int getTotalIngressosVendidos() {
+    public int getTotalTicketsSold() {
 
-        return areas.stream().mapToInt(Area::getTotalIngressosVendidos).sum();
+        return areas.stream().mapToInt(Area::getTotalTicketsSold).sum();
     }
 
-    public double getReceitaTotal() {
+    public double getTotalRevenue() {
         return areas.stream().mapToDouble(Area::getReceita).sum();
     }
 

@@ -1,4 +1,4 @@
-package classes;
+package objects;
 
 public class Area {
     private final boolean[] seats;
@@ -29,7 +29,7 @@ public class Area {
         seats[index] = false;
     }
 
-    public int getTotalIngressosVendidos() {
+    public int getTotalTicketsSold() {
         int total = 0;
         for (boolean Seats : seats) {
             if (Seats) {
@@ -40,6 +40,6 @@ public class Area {
     }
 
     public double getReceita() {
-        return getTotalIngressosVendidos() * preco;
+        return getTotalTicketsSold() * preco;
     }
 }

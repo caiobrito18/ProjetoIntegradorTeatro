@@ -1,13 +1,13 @@
 import java.util.HashMap;
 import java.util.Scanner;
 
-import classes.Client;
-import classes.Piece;
-import classes.Theater;
+import objects.Client;
+import objects.Piece;
+import objects.Theater;
 
 public class App {
 
-  public void main(String[] args) {
+  public static void main(String[] args) {
     Theater theater = new Theater();
     HashMap<String, Client> clients = new HashMap<>();
     HashMap<String, Piece> pieces = new HashMap<>();
@@ -18,10 +18,15 @@ public class App {
     Integer seat;
     Boolean rodando = true;
 
-    pieces.put("1", new Piece("Peça 1"));
-    pieces.put("2", new Piece("Peça 2"));
-    pieces.put("3", new Piece("Peça 3"));
+    pieces.put("1", new Piece("hamlet"));
+    pieces.put("2", new Piece("romeo e julieta"));
+    pieces.put("3", new Piece("otelo"));
     Scanner input = new Scanner(System.in);
+    Scanner cpfScanner = new Scanner(System.in);
+    Scanner pieceScanner = new Scanner(System.in);
+    Scanner areaScanner = new Scanner(System.in);
+    Scanner turnScanner = new Scanner(System.in);
+    Scanner seatScanner = new Scanner(System.in);
     while (rodando) {
       Integer opt;
       System.out.println("""
@@ -30,21 +35,59 @@ public class App {
           [1]Comprar um ingresso
           [2]imprimir ingresso
           [3]ver estátisticas de vendas
-          [3]Sair
+          [0]Sair
           """);
       opt = input.nextInt();
       switch (opt) {
         case 1:
           System.out.println("insira o cpf do titular do ingresso");
+          cpf = cpfScanner.nextLine();
           System.out.println("Qual será a peça?");
+          System.out.println("""
+              insira somente o número da peça desejada
+              1.Hamlet
+              2.Romeo e Julieta
+              3.Otelo, o Mouro de veneza
+              """);
+          piece = pieceScanner.nextLine();
           System.out.println("Qual será a sessão");
+          System.out.println("""
+              insira somente o número referente ao turno desejado
+              1. Manhã
+              2. Tarde
+              3. Noite
+              """);
+          turn = turnScanner.nextLine();
+          System.out.println("qual área deseja");
+          area = areaScanner.nextInt();
+          Methods.printArray(theater.getAreas().get(area));
           System.out.println("Qual assento desejado?");
-
+          seat = seatScanner.nextInt();
+          System.out.println(
+              Methods.buyTicket(cpf, piece, pieces, turn, area,
+                  clients, theater, seat));
+          continue;
+        case 2:
+          System.out.println("insira o cpf do titular do ingresso");
+          cpf = cpfScanner.nextLine();
+          String printedTicket = Methods.printTicket(cpf, clients);
+          System.out.println(printedTicket);
+          continue;
+        case 3:
+          Methods.statistics(pieces, theater);
+        case 0:
+          rodando = false;
           break;
-
         default:
           break;
       }
+      System.out.println("\n");
     }
+    input.close();
+    cpfScanner.close();
+    areaScanner.close();
+    seatScanner.close();
+    turnScanner.close();
+    pieceScanner.close();
   }
 }
