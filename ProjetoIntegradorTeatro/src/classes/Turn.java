@@ -11,19 +11,19 @@ public class Turn {
     this.tickets = new ArrayList<>();
   }
 
-  public void adicionarTicket(Ticket ticket) {
+  public void addTicket(Ticket ticket) {
     tickets.add(ticket);
   }
 
-  public void removerTicket(Ticket ticket) {
+  public void removeTicket(Ticket ticket) {
     tickets.remove(ticket);
   }
 
-  public int getTotalTicketsVendidos() {
+  public int getTotalTicketsSold() {
     return tickets.size();
   }
 
-  public double getReceita() {
+  public double getRevenue() {
     return tickets.stream().mapToDouble(Ticket::getPreco).sum();
   }
 }

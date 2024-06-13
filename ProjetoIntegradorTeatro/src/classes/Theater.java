@@ -1,8 +1,6 @@
 package classes;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class Theater {
     private final ArrayList<Area> areas;

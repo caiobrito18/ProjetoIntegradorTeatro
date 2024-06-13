@@ -1,38 +1,38 @@
 package classes;
 
 public class Area {
-    private final boolean[] poltronas;
+    private final boolean[] seats;
     private final double preco;
 
-    public Area(int totalPoltronas, double preco) {
-        this.poltronas = new boolean[totalPoltronas];
+    public Area(int totalSeats, double preco) {
+        this.seats = new boolean[totalSeats];
         this.preco = preco;
     }
 
-    public int getTotalPoltronas() {
-        return poltronas.length;
+    public int getTotalSeats() {
+        return seats.length;
     }
 
     public double getPreco() {
         return preco;
     }
 
-    public boolean isPoltronaOcupada(int index) {
-        return poltronas[index];
+    public boolean isSeatOccupied(int index) {
+        return seats[index];
     }
 
-    public void comprarPoltrona(int index) {
-        poltronas[index] = true;
+    public void buySeats(int index) {
+        seats[index] = true;
     }
 
-    public void cancelarPoltrona(int index) {
-        poltronas[index] = false;
+    public void cancelSeats(int index) {
+        seats[index] = false;
     }
 
     public int getTotalIngressosVendidos() {
         int total = 0;
-        for (boolean poltrona : poltronas) {
-            if (poltrona) {
+        for (boolean Seats : seats) {
+            if (Seats) {
                 total++;
             }
         }
