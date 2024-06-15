@@ -18,15 +18,16 @@ public class App {
         Integer seat;
         Boolean rodando = true;
 
-        pieces.put("1", new Piece("hamlet"));
-        pieces.put("2", new Piece("romeo e julieta"));
-        pieces.put("3", new Piece("otelo"));
+        pieces.put("1", new Piece("Hamlet"));
+        pieces.put("2", new Piece("Romeu e Julieta"));
+        pieces.put("3", new Piece("Otelo"));
         Scanner input = new Scanner(System.in);
         Scanner cpfScanner = new Scanner(System.in);
         Scanner pieceScanner = new Scanner(System.in);
         Scanner areaScanner = new Scanner(System.in);
         Scanner turnScanner = new Scanner(System.in);
         Scanner seatScanner = new Scanner(System.in);
+        Scanner buyScanner = new Scanner(System.in);
         while (rodando) {
             Integer opt;
             System.out.println("""
@@ -40,11 +41,11 @@ public class App {
             opt = input.nextInt();
             switch (opt) {
                 case 1:
-                    System.out.println("insira o cpf do titular do ingresso");
+                    System.out.println("Insira o cpf do titular do ingresso");
                     cpf = cpfScanner.nextLine();
                     System.out.println("Qual será a peça?");
                     System.out.println("""
-                            insira somente o número da peça desejada
+                            Insira somente o número da peça desejada
                             1.Hamlet
                             2.Romeu e Julieta
                             3.Otelo, o Mouro de veneza
@@ -52,13 +53,13 @@ public class App {
                     piece = pieceScanner.nextLine();
                     System.out.println("Qual será a sessão");
                     System.out.println("""
-                            insira somente o número referente ao turno desejado
+                            Insira somente o número referente ao turno desejado
                             1. Manhã
                             2. Tarde
                             3. Noite
                             """);
                     turn = turnScanner.nextLine();
-                    System.out.println("qual área deseja");
+                    System.out.println("Qual área deseja");
                     Methods.printAreas();
                     area = areaScanner.nextInt();
                     Methods.printArray(theater.getAreas().get(area - 1));
@@ -75,7 +76,16 @@ public class App {
                     System.out.println(printedTicket);
                     continue;
                 case 3:
+
                     System.out.println(Methods.statistics(pieces, theater));
+                    continue;
+                case 4:
+                    System.out.println("Quantos ingressos desejas comprar? ");
+                    int amount = buyScanner.nextInt();
+                    for (int i = 0; i < amount; i++) {
+                        Methods.ghostBuy(clients, theater, pieces);
+                    }
+                    System.out.println("Ingressos comprados com sucesso");
                     continue;
                 case 0:
                     rodando = false;
@@ -91,5 +101,6 @@ public class App {
         seatScanner.close();
         turnScanner.close();
         pieceScanner.close();
+        buyScanner.close();
     }
 }

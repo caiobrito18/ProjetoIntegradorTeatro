@@ -102,38 +102,44 @@ public class Methods {
   public static String statistics(HashMap<String, Piece> pieces, Theater teatro) {
     int maxOccupation = pieces.get("1").getTotalTicketsSold();
     String biggestOccupation = "";
-    String biggestOccupationID = "";
-    for (Integer i = 1; i <= pieces.size(); i++) {
-      if (pieces.get(i.toString()).getTotalTicketsSold() > maxOccupation)
+    String biggestOccupationID = "1";
+    for (Integer i = 1; i <= 3; i++) {
+      if (pieces.get(i.toString()).getTotalTicketsSold() > maxOccupation) {
         biggestOccupation = pieces.get(i.toString()).getName();
-      biggestOccupationID = i.toString();
+        biggestOccupationID = i.toString();
+      }
     }
+
     double maxSale = pieces.get("1").getTotalRevenue();
     String biggestSale = "";
-    String biggestSaleID = "";
-    for (Integer i = 1; i <= pieces.size(); i++) {
-      if (pieces.get(i.toString()).getTotalTicketsSold() > maxSale)
+    String biggestSaleID = "1";
+    for (Integer i = 1; i <= 3; i++) {
+      if (pieces.get(i.toString()).getTotalRevenue() > maxSale) {
         biggestSale = pieces.get(i.toString()).getName();
-      biggestSaleID = i.toString();
+        biggestSaleID = i.toString();
+      }
     }
+
     int minOccupation = pieces.get("1").getTotalTicketsSold();
     String smallestOccupation = "";
-    String smallestOccupationID = "";
-    for (Integer i = 1; i <= pieces.size(); i++) {
-      if (pieces.get(i.toString()).getTotalTicketsSold() <= minOccupation) {
+    String smallestOccupationID = "1";
+    for (Integer i = 1; i <= 3; i++) {
+      if (pieces.get(i.toString()).getTotalTicketsSold() < minOccupation) {
         smallestOccupation = pieces.get(i.toString()).getName();
         smallestOccupationID = i.toString();
       }
     }
+
     double minSale = pieces.get("1").getTotalRevenue();
     String smallestSale = "";
-    String smallestSaleID = "";
-    for (Integer i = 1; i <= pieces.size(); i++) {
-      if (pieces.get(i.toString()).getTotalTicketsSold() <= minSale) {
+    String smallestSaleID = "1";
+    for (Integer i = 1; i <= 3; i++) {
+      if (pieces.get(i.toString()).getTotalRevenue() < minSale) {
         smallestSale = pieces.get(i.toString()).getName();
         smallestSaleID = i.toString();
       }
     }
+
     StringBuilder stats = new StringBuilder("Estatísticas de Vendas:\n\n");
     stats.append("Total de Ingressos Vendidos: ").append(teatro.getTotalTicketsSold()).append("\n");
     stats.append("Receita Total: R$ ").append(String.format("%.2f", teatro.getTotalRevenue())).append("\n\n");
@@ -145,6 +151,7 @@ public class Methods {
       stats.append("Lucro médio: ").append(average).append("\n");
       stats.append("Receita: R$ ").append(String.format("%.2f", peca.getTotalRevenue())).append("\n\n");
     });
+    System.out.println(biggestOccupationID + " " + biggestSaleID + " " + smallestOccupationID + " " + smallestSaleID);
     stats.append("Peça mais vendida: ")
         .append(pieces.get(biggestOccupationID).getName())
         .append("\n");
@@ -152,9 +159,11 @@ public class Methods {
         .append("Peça com maior receita: ")
         .append(pieces.get(biggestSaleID).getName())
         .append("\n");
+
     stats.append("Peça menos vendida: ")
         .append(pieces.get(smallestOccupationID).getName())
         .append("\n");
+
     stats
         .append("Peça com menor receita: ")
         .append(pieces.get(smallestSaleID).getName())
@@ -162,4 +171,23 @@ public class Methods {
     return stats.toString();
   }
 
+  public static void ghostBuy(HashMap<String, Client> clients, Theater theater, HashMap<String, Piece> pieces) {
+    Integer num2 = random(1, 3);
+    Integer num3 = random(1, 3);
+    Integer num4 = random(1, 3);
+    Integer num5 = random(1, 14);
+    Area selectedArea = theater.getAreas().get((num5 - 1));
+    Integer num6 = random(1, selectedArea.getTotalSeats());
+    System.out.println(num2 + " " + num3 + " " + num4 + " " + num5 + " " + num6);
+    buyTicket(num2.toString(), num3.toString(), pieces, num4.toString(), num5, clients, theater, num6);
+  }
+
+  static Integer random(int min, int max) {
+    // Minimum value of range
+    // Maximum value of range
+    // Print the min and max
+    Integer random_int = (int) Math.floor(Math.random() * (max - min + 1) + min);
+    // Printing the generated random numbers
+    return random_int;
+  }
 }
